@@ -1,10 +1,19 @@
-body,
-#root {
+.app-shell {
     margin: 0;
-
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #fff7fa;
+    transition: background-color 180ms ease;
+}
+
+.app-shell.dark-theme {
+    background-color: #201b22;
+    color: #f7edf3;
 }
 
 .board {
@@ -22,7 +31,7 @@ body,
 .square {
     width: 100px;
     height: 100px;
-    border: dashed 1px black;
+    border: dashed 1px var(--square-border, #242124);
     margin-top: -1px;
     margin-right: -1px;
     display: flex;
@@ -32,24 +41,36 @@ body,
 }
 
 .square.lastcell {
-    background-color: rgb(238, 214, 226);
+    background-color: var(--highlight-color, rgb(238, 214, 226));
 }
 
 .outside {
+    --square-border: #242124;
+    --highlight-color: rgb(238, 214, 226);
+    --button-color: #f88db6;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
     width: 300px;
-    border: 5px solid rgb(248, 141, 182);
+    border: 5px solid var(--button-color);
     border-radius: 15px;
     padding: 3px 2px;
+    background-color: #ffffff;
+    color: #242124;
 }
 
-.robot-toggle {
+.dark-theme .outside {
+    background-color: #201b22;
+    color: #f7edf3;
+}
+
+.theme-toggle,
+.robot-toggle,
+.reset-button {
     padding: 10px 16px;
-    background-color: #f88db6;
+    background-color: var(--button-color, #f88db6);
     color: white;
     border: none;
     border-radius: 5px;
@@ -57,9 +78,24 @@ body,
     font-size: 16px;
 }
 
+.theme-toggle:focus-visible,
+.robot-toggle:focus-visible,
+.reset-button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
 .robot-hint {
     font-size: 14px;
     text-align: center;
+}
+
+.win-counter {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .game-status {
@@ -76,13 +112,11 @@ body,
 
 .reset-button {
     display: flex;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f88db6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     align-items: center;
     justify-content: center;
+}
+.theme-toggle {
+    background-color: transparent;
+    border: 3px solid #6e1f3e;
+    color: #85274d;
 }
